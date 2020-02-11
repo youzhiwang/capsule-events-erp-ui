@@ -23,7 +23,22 @@ const routes = [
         path: 'brand-manage',
         name: 'brandManage',
         component: () => import('../views/brand-manage/index.vue')
-      }
+      },
+      {
+        path: 'subclass/:id/:brandName',
+        name: 'subclass',
+        component: () => import('../views/subclass/index.vue')
+      },
+      {
+        path: 'commodity-manage',
+        name: 'commodityManage',
+        component: () => import('../views/commodity-manage/index.vue')
+      },
+      {
+        path: 'cost-manage',
+        name: 'costManage',
+        component: () => import('../views/cost-manage/index.vue')
+      },
     ]
   }
 ]

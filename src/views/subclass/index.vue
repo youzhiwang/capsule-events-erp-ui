@@ -1,26 +1,19 @@
 <template>
-    <div class="brand-manage">
+    <div class="subclass">
         <div class="operation-wrap">
-            <el-button type="primary" @click="dialogVisible = true">新增品牌</el-button>
+            <el-button icon="el-icon-back" @click="handleBack"/>
+            <el-button type="primary" @click="dialogVisible = true">新增子类</el-button>
+            <span class="brand-name">当前品牌：{{ brandName }}</span>
         </div>
         <div class="table-wrap">
-            <el-table :data="tableData" border stripe height="100%">
-                <el-table-column type="index" label="序号" :index="indexMethod"/>
-                <el-table-column label="品牌名称" prop="brand_name"/>
-                <el-table-column label="品牌类型">
+            <el-table :data="tableData" stripe border height="100%">
+                <el-table-column label="序号" type="index" :index="indexMethod"/>
+                <el-table-column label="名称" prop="subclass_name"/>
+                <el-table-column label="备注" prop="remark"/>
+                <el-table-column label="操作" width="200px">
                     <template #default="{row}">
-                        <span>
-                            <i v-if="row.brand_type === 1" class="el-icon-s-flag"/>
-                            <i v-if="row.brand_type === 2" class="el-icon-s-opportunity"/>
-                            {{ row.brand_type | brandType  }}
-                        </span>
-                    </template>
-                </el-table-column>
-                <el-table-column label="操作" width="200">
-                    <template #default="{row}">
-                        <el-button type="text" @click="handleCheckSubclass(row)">查看子类</el-button>
-                        <el-button type="text" @click="handleEditBrand(row)">编辑</el-button>
-                        <el-button type="text" @click="handleDeleteBrand(row)">删除</el-button>
+                        <el-button type="text" @click="handleEdit(row)">编辑</el-button>
+                        <el-button type="text" @click="handleDelete(row)">删除</el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -35,21 +28,18 @@
                            @current-change="handleCurrentChange"/>
         </div>
 
-        <el-dialog title="新增品牌"
+        <el-dialog title="新增子类"
                    :visible.sync="dialogVisible"
                    width="30%"
                    :close-on-click-modal="false"
                    :close-on-press-escape="false"
                    :before-close="handleCancel">
             <el-form ref="Form" :model="form" :rules="rules" label-width="80px">
-                <el-form-item label="品牌名称" prop="brandName">
-                    <el-input v-model="form.brandName" placeholder="请输入品牌名称"/>
+                <el-form-item label="子类名称" prop="subclassName">
+                    <el-input v-model="form.subclassName" placeholder="请输入品牌名称"/>
                 </el-form-item>
-                <el-form-item label="品牌类型" prop="brandType">
-                    <el-select v-model="form.brandType" placeholder="请选择品牌类型" style="width: 100%;">
-                        <el-option v-for="(item, index) in brandTypeOptions" :key="index" :label="item.label"
-                                   :value="item.value"/>
-                    </el-select>
+                <el-form-item label="备注" prop="remark">
+                    <el-input v-model="form.remark" type="textarea" placeholder="请输入备注"/>
                 </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
@@ -58,21 +48,18 @@
             </div>
         </el-dialog>
 
-        <el-dialog title="编辑品牌"
+        <el-dialog title="编辑子类"
                    :visible.sync="editDialogVisible"
                    width="30%"
                    :close-on-click-modal="false"
                    :close-on-press-escape="false"
                    :before-close="handleEditCancel">
             <el-form ref="EditForm" :model="editForm" :rules="rules" label-width="80px">
-                <el-form-item label="品牌名称" prop="brandName">
-                    <el-input v-model="editForm.brandName" placeholder="请输入品牌名称"/>
+                <el-form-item label="子类名称" prop="subclassName">
+                    <el-input v-model="editForm.subclassName" placeholder="请输入品牌名称"/>
                 </el-form-item>
-                <el-form-item label="品牌类型" prop="brandType">
-                    <el-select v-model="editForm.brandType" placeholder="请选择品牌类型" style="width: 100%;">
-                        <el-option v-for="(item, index) in brandTypeOptions" :key="index" :label="item.label"
-                                   :value="item.value"/>
-                    </el-select>
+                <el-form-item label="备注" prop="remark">
+                    <el-input v-model="editForm.remark" type="textarea" placeholder="请输入备注"/>
                 </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
@@ -85,54 +72,48 @@
 
 <script>
   export default {
-    name: 'brandManage',
+    name: 'subclass',
     data() {
       return {
+        // 品牌id
+        id: '',
+        // 品牌名称
+        brandName: '',
         tableData: [],
         paginationConfig: {
           pageNum: 1,
           pageSize: 10
         },
-        pageSizes: [10, 20, 30, 40, 50],
         total: 0,
+        pageSizes: [10, 20, 30, 40, 50],
         dialogVisible: false,
         form: {
-          brandName: '',
-          brandType: ''
+          subclassName: '',
+          remark: ''
         },
-        brandTypeOptions: [
-          {label: '自有', value: 1},
-          {label: '合作', value: 2}
-        ],
         rules: {
-          brandName: [
-            {required: true, trigger: 'blur', message: '请输入品牌名称'},
-            {max: 100, trigger: blur, message: '最长100个字符'}
+          subclassName: [
+            {required: true, trigger: 'blur', message: '请输入子类名称'},
+            {max: 100, trigger: 'blur', message: '最大长度为100'}
           ],
-          brandType: [
-            {required: true, trigger: 'change', message: '请选择品牌类型'}
+          remark: [
+            {max: 200, trigger: 'blur', message: '最大长度为200'}
           ]
         },
         editDialogVisible: false,
         editForm: {
           id: '',
-          brandName: '',
-          brandType: ''
-        }
+          subclassName: '',
+          remark: ''
+        },
       }
     },
     methods: {
+      handleBack() {
+        this.$router.back()
+      },
       indexMethod(index) {
         return (this.paginationConfig.pageNum - 1) * this.paginationConfig.pageSize + index + 1
-      },
-      getTableData() {
-        this.axios.get('/api/brand-list', {
-          params: this.paginationConfig
-        }).then(res => {
-          res = res.data
-          this.tableData = res.data.list
-          this.total = res.data.total
-        })
       },
       handleSizeChange(pageSize) {
         this.paginationConfig.pageSize = pageSize
@@ -143,6 +124,15 @@
         this.paginationConfig.pageNum = currentPageNum
         this.getTableData()
       },
+      getTableData() {
+        this.axios.get(`/api/subclass-list/${this.id}`, {
+          params: this.paginationConfig
+        }).then(res => {
+          res = res.data
+          this.tableData = res.data.list
+          this.total = res.data.total
+        })
+      },
       handleCancel() {
         this.$refs.Form.resetFields()
         this.dialogVisible = false
@@ -150,22 +140,23 @@
       handleConfirm() {
         this.$refs.Form.validate(v => {
           if (v) {
-            this.axios.post('/api/brand', this.form).then(res => {
+            const params = Object.assign({}, this.form)
+            params.brandId = this.id
+            this.axios.post('/api/subclass', params).then(res => {
               res = res.data
               if (res.code === 'success') {
-                this.getTableData()
+                this.$message.success('添加成功')
                 this.handleCancel()
-              } else {
-                this.$message.error(res.message)
-              }
+                this.getTableData()
+              } else this.$message.error(res.message)
             })
           }
         })
       },
-      handleEditBrand(row) {
+      handleEdit(row) {
         this.editForm.id = row.id
-        this.editForm.brandName = row.brand_name
-        this.editForm.brandType = row.brand_type
+        this.editForm.subclassName = row.subclass_name
+        this.editForm.remark = row.remark
         this.editDialogVisible = true
       },
       handleEditCancel() {
@@ -175,25 +166,26 @@
       handleEditConfirm() {
         this.$refs.EditForm.validate(v => {
           if (v) {
-            this.axios.put('/api/brand', this.editForm).then(res => {
+            const params = Object.assign({}, this.editForm)
+            params.brandId = this.id
+            this.axios.put('/api/subclass', params).then(res => {
               res = res.data
               if (res.code === 'success') {
-                this.getTableData()
+                this.$message.success('修改成功')
                 this.handleEditCancel()
-              } else {
-                this.$message.error(res.message)
-              }
+                this.getTableData()
+              } else this.$message.error(res.message)
             })
           }
         })
       },
-      handleDeleteBrand(row) {
-        this.$confirm(`是否删除品牌「${row.brand_name}」`, '提示', {
+      handleDelete(row) {
+        this.$confirm(`是否删除子类「${row.subclass_name}」`, '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          this.axios.delete(`/api/brand/${row.id}`).then(res => {
+          this.axios.delete(`/api/subclass/${row.id}`).then(res => {
             res = res.data
             if (res.code === 'success') {
               this.$message.success('删除成功')
@@ -201,40 +193,31 @@
             }
           })
         })
-      },
-      handleCheckSubclass(row) {
-        this.$router.push({name: 'subclass', params: {id: row.id, brandName: row.brand_name}})
-      }
-    },
-    filters: {
-      brandType(val) {
-        switch (val) {
-          case 1:
-            return '自有'
-          case 2:
-            return '合作'
-          default:
-            return '未知'
-        }
       }
     },
     created() {
+      this.id = this.$route.params.id
+      this.brandName = this.$route.params.brandName
       this.getTableData()
     }
   }
 </script>
 
 <style lang="scss" scoped>
-    .brand-manage {
+    .subclass {
         width: 100%;
+        height: 100%;
         padding: 0 16px;
         box-sizing: border-box;
-        height: 100%;
-        overflow-y: auto;
 
         .operation-wrap {
-            box-sizing: border-box;
             padding: 14px 0;
+
+            .brand-name {
+                font-size: 12px;
+                padding: 0 16px;
+                color: rgba(0, 0, 0, .8)
+            }
         }
 
         .table-wrap {
