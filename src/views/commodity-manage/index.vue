@@ -73,7 +73,7 @@
                 </el-table-column>
                 <el-table-column label="操作" width="150px">
                     <template #default="{row}">
-                        <el-button type="text">活动价</el-button>
+                        <el-button type="text" @click="handleActivityPrice(row)">活动价</el-button>
                         <el-button type="text" @click="handleEdit(row)">编辑</el-button>
                         <el-button type="text" @click="handleDelete(row)">删除</el-button>
                     </template>
@@ -400,6 +400,15 @@
               this.getTableData()
             }
           })
+        })
+      },
+      handleActivityPrice(row) {
+        this.$router.push({
+          name: 'activityPrice',
+          params: {
+            commodityId: row.id,
+            commodityName: row.commodity_name
+          }
         })
       }
     },

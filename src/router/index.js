@@ -35,6 +35,11 @@ const routes = [
         component: () => import('../views/commodity-manage/index.vue')
       },
       {
+        path: 'activity-price/:commodityId/:commodityName',
+        name: 'activityPrice',
+        component: () => import('../views/activity-price/index.vue')
+      },
+      {
         path: 'cost-manage',
         name: 'costManage',
         component: () => import('../views/cost-manage/index.vue')
