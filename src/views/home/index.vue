@@ -1,6 +1,8 @@
 <template>
     <div class="home">
-        <h3>home</h3>
+        <div class="tips-wrap">
+            <el-alert type="info" title="首页正在开发中，敬请期待..."/>
+        </div>
     </div>
 </template>
 
@@ -10,6 +12,15 @@
   }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+    .home {
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        padding: 0 16px;
 
+        .tips-wrap {
+            padding: 16px 0;
+        }
+    }
 </style>

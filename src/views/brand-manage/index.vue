@@ -16,7 +16,7 @@
                         </span>
                     </template>
                 </el-table-column>
-                <el-table-column label="操作" width="200">
+                <el-table-column label="操作" width="150px">
                     <template #default="{row}">
                         <el-button type="text" @click="handleCheckSubclass(row)">查看子类</el-button>
                         <el-button type="text" @click="handleEditBrand(row)">编辑</el-button>

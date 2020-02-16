@@ -2,7 +2,7 @@
     <div class="layout">
         <div class="top-nav-wrap">
             <div class="logo">
-                <h3>Capsule Events ERP</h3>
+                <h3>Capsule Events ERP <sub>v: 1.0.0</sub></h3>
             </div>
         </div>
         <div class="main-wrap">
@@ -14,19 +14,19 @@
                          active-text-color="#ffffff"
                          :router="true">
                     <el-menu-item index="/home">
-                        <i class="el-icon-guide" />
+                        <i class="el-icon-guide"/>
                         <span slot="title">首页</span>
                     </el-menu-item>
                     <el-menu-item index="/brand-manage">
-                        <i class="el-icon-menu" />
+                        <i class="el-icon-menu"/>
                         <span slot="title">品牌管理</span>
                     </el-menu-item>
                     <el-menu-item index="/commodity-manage">
-                        <i class="el-icon-document" />
+                        <i class="el-icon-document"/>
                         <span slot="title">商品管理</span>
                     </el-menu-item>
                     <el-menu-item index="/cost-manage">
-                        <i class="el-icon-setting" />
+                        <i class="el-icon-setting"/>
                         <span slot="title">成本管理</span>
                     </el-menu-item>
                 </el-menu>
@@ -61,6 +61,11 @@
             .logo {
                 color: #ffffff;
                 padding: 0 24px;
+
+                sub {
+                    font-size: 12px;
+                    color: rgba(255, 255, 255, .8);
+                }
             }
         }
 
