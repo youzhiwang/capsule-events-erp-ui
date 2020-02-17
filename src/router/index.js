@@ -13,6 +13,7 @@ const routes = [
     path: '/',
     name: 'layout',
     component: () => import('../views/layout/index.vue'),
+    redirect: {name: 'home'},
     children: [
       {
         path: 'home',
@@ -43,7 +44,7 @@ const routes = [
         path: 'cost-manage',
         name: 'costManage',
         component: () => import('../views/cost-manage/index.vue')
-      },
+      }
     ]
   }
 ]
@@ -52,6 +53,18 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.name === 'login') {
+    const loginStatus = localStorage.getItem('loginStatus')
+    if (loginStatus) next({name: 'home'})
+    else next()
+  } else {
+    const loginStatus = localStorage.getItem('loginStatus')
+    if (loginStatus) next()
+    else next({name: 'login'})
+  }
 })
 
 export default router

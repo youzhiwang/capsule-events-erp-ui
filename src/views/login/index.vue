@@ -69,8 +69,11 @@ export default {
         if (v) {
           this.axios.post('/api/login', this.form).then(res => {
             res = res.data
-            console.log(res)
             if (res.code === 'success') {
+              // 设置登录信息
+              localStorage.setItem('username', res.data.username)
+              localStorage.setItem('nickname', res.data.nickname)
+              localStorage.setItem('loginStatus', true)
               this.$message.success('登录成功')
               this.$router.push({ name: 'home' })
             } else this.$message.error(res.message)
