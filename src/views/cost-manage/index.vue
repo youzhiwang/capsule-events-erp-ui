@@ -17,7 +17,7 @@
                 </el-row>
             </el-form>
         </div>
-        <hr>
+        <el-divider class="divider--custom" />
         <div class="operation-wrap">
             <el-button type="primary" @click="addDialogVisible = true">新增采购</el-button>
             <el-button @click="$message.info('导出功能正在开发中')">导 出</el-button>
@@ -44,7 +44,7 @@
                 </el-table-column>
                 <el-table-column label="序号" type="index" :index="indexMethod"/>
                 <el-table-column label="采购商品" prop="purchase_goods"/>
-                <el-table-column label="采购价格" prop="purchase_price"/>
+                <el-table-column label="采购价格(¥)" prop="purchase_price"/>
                 <el-table-column label="单位" prop="unit"/>
                 <el-table-column label="采购时间" prop="purchase_time"/>
                 <el-table-column label="联系人" prop="contact_person"/>
@@ -78,7 +78,9 @@
                     <el-input v-model="addForm.purchaseGoods" placeholder="请输入采购商品"/>
                 </el-form-item>
                 <el-form-item label="采购价格" prop="purchasePrice">
-                    <el-input v-model="addForm.purchasePrice" type="number" placeholder="请输入价格商品，最多保留2位小数"/>
+                    <el-input v-model="addForm.purchasePrice" type="number" placeholder="请输入价格商品，最多保留2位小数">
+                        <template slot="append">¥</template>
+                    </el-input>
                 </el-form-item>
                 <el-form-item label="单位" prop="unit">
                     <el-input v-model="addForm.unit" placeholder="请输入单位"/>
@@ -117,7 +119,9 @@
                     <el-input v-model="editForm.purchaseGoods" disabled placeholder="请输入采购商品"/>
                 </el-form-item>
                 <el-form-item label="采购价格" prop="purchasePrice">
-                    <el-input v-model="editForm.purchasePrice" type="number" placeholder="请输入价格商品，最多保留2位小数"/>
+                    <el-input v-model="editForm.purchasePrice" type="number" placeholder="请输入价格商品，最多保留2位小数">
+                        <template slot="append">¥</template>
+                    </el-input>
                 </el-form-item>
                 <el-form-item label="单位" prop="unit">
                     <el-input v-model="editForm.unit" placeholder="请输入单位"/>
@@ -326,10 +330,10 @@
         box-sizing: border-box;
 
         .filter-wrap {
-            padding-top: 18px;
+            padding-top: 16px;
         }
 
-        hr {
+        .divider--custom {
             margin: 0;
         }
 
@@ -338,7 +342,7 @@
         }
 
         .table-wrap {
-            height: calc(100% - 68px - 2px - 64px - 32px);
+            height: calc(100% - 66px - 1px - 64px - 32px);
         }
 
         .pagination-wrap {

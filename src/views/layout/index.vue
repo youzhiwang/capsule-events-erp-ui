@@ -2,13 +2,13 @@
     <div class="layout">
         <div class="top-nav-wrap">
             <div class="logo">
-                <h3>Capsule Events ERP <sub>v: 1.0.0</sub></h3>
+                <h3>Capsule Events ERP <sub>v: 1.0.1</sub></h3>
             </div>
             <div class="blank"/>
             <div class="user-info">
                 <el-dropdown trigger="click" @command="handleCommand">
                     <div class="el-dropdown-link nickname">
-                        你好,{{ nickname }}<i class="el-icon-arrow-down el-icon--right"></i>
+                        {{ greetingWords }}，{{ nickname }}<i class="el-icon-arrow-down el-icon--right"></i>
                     </div>
                     <el-dropdown-menu slot="dropdown">
                         <el-dropdown-item command="changePassword">修改密码</el-dropdown-item>
@@ -26,7 +26,7 @@
                          active-text-color="#ffffff"
                          :router="true">
                     <el-menu-item index="/home">
-                        <i class="el-icon-guide"/>
+                        <i class="el-icon-s-home"/>
                         <span slot="title">首页</span>
                     </el-menu-item>
                     <el-menu-item index="/brand-manage">
@@ -38,7 +38,7 @@
                         <span slot="title">商品管理</span>
                     </el-menu-item>
                     <el-menu-item index="/cost-manage">
-                        <i class="el-icon-setting"/>
+                        <i class="el-icon-s-opportunity"/>
                         <span slot="title">成本管理</span>
                     </el-menu-item>
                     <el-menu-item index="/version-manage">
@@ -59,6 +59,7 @@
     name: 'layout',
     data() {
       return {
+        greetingWords: '',
         nickname: ''
       }
     },
@@ -78,7 +79,8 @@
               if (res.code === 'success') this.$message.success('密码修改成功，下次登录将使用新密码')
               else this.$message.error(res.message)
             })
-          }).catch(() => {})
+          }).catch(() => {
+          })
         }
         if (commandItem === 'logout') {
           this.axios.get('/api/logout').then(res => {
@@ -94,9 +96,27 @@
             }
           })
         }
+      },
+      setGreetingWords() {
+        const now = new Date()
+        const hour = now.getHours()
+        let greetingWords = ''
+        if (hour < 6) greetingWords = '凌晨好'
+        else if (hour < 9) greetingWords = '早上好'
+        else if (hour < 12) greetingWords = '上午好'
+        else if (hour < 14) greetingWords = '中午好'
+        else if (hour < 17) greetingWords = '下午好'
+        else if (hour < 19) greetingWords = '傍晚好'
+        else if (hour < 22) greetingWords = '晚上好'
+        else {
+          greetingWords = '夜里好'
+          this.$message.warning('深夜了，赶紧休息吧～')
+        }
+        this.greetingWords = greetingWords
       }
     },
     created() {
+      this.setGreetingWords()
       const loginStatus = localStorage.getItem('loginStatus')
       if (loginStatus) this.nickname = localStorage.getItem('nickname')
     }
@@ -142,6 +162,7 @@
 
                 .nickname {
                     color: #fff;
+                    cursor: pointer;
                 }
             }
         }

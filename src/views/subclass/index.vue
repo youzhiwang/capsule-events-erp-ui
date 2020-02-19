@@ -211,7 +211,7 @@
         box-sizing: border-box;
 
         .operation-wrap {
-            padding: 14px 0;
+            padding: 16px 0;
 
             .brand-name {
                 font-size: 12px;
@@ -221,7 +221,7 @@
         }
 
         .table-wrap {
-            height: calc(100% - 60px - 32px);
+            height: calc(100% - 64px - 32px);
         }
 
         .pagination-wrap {

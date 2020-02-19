@@ -23,15 +23,13 @@
                         </el-form-item>
                     </el-col>
                     <el-col :span="6">
-                        <el-form-item label-width="0">
-                            <el-button type="primary" @click="handleSearch">搜 索</el-button>
-                            <el-button @click="handleReset">重 置</el-button>
-                        </el-form-item>
+                        <el-button type="primary" @click="handleSearch">搜 索</el-button>
+                        <el-button @click="handleReset">重 置</el-button>
                     </el-col>
                 </el-row>
             </el-form>
         </div>
-        <hr>
+        <el-divider class="divider--custom" />
         <div class="operation-wrap">
             <el-button type="primary" @click="addDialogVisible = true">新增商品</el-button>
             <el-button @click="$message.info('导出功能正在开发中')">导 出</el-button>
@@ -426,9 +424,9 @@
     height: 100%;
     width: 100%;
     .filter-wrap {
-        padding-top: 18px;
+        padding-top: 16px;
     }
-    hr {
+    .divider--custom {
         margin: 0;
     }
     .operation-wrap {
@@ -436,7 +434,7 @@
     }
 
     .table-wrap {
-        height: calc(100% - 69px - 2px - 64px - 32px);
+        height: calc(100% - 66px - 1px - 64px - 32px);
     }
 
     .pagination-wrap {

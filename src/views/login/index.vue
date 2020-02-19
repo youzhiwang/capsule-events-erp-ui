@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <div class="form-wrap">
-      <h3>Capsule Event ERP</h3>
+      <h3>Capsule Events ERP</h3>
       <el-form
         ref="Form"
         :model="form"

@@ -155,6 +155,7 @@
               if (res.code === 'success') {
                 this.getTableData()
                 this.handleCancel()
+                this.$message.success('添加品牌成功')
               } else {
                 this.$message.error(res.message)
               }
@@ -180,6 +181,7 @@
               if (res.code === 'success') {
                 this.getTableData()
                 this.handleEditCancel()
+                this.$message.success('编辑品牌成功')
               } else {
                 this.$message.error(res.message)
               }
@@ -234,11 +236,11 @@
 
         .operation-wrap {
             box-sizing: border-box;
-            padding: 14px 0;
+            padding: 16px 0;
         }
 
         .table-wrap {
-            height: calc(100% - 60px - 32px);
+            height: calc(100% - 64px - 32px);
         }
 
         .pagination-wrap {
