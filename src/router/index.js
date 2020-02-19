@@ -44,6 +44,11 @@ const routes = [
         path: 'cost-manage',
         name: 'costManage',
         component: () => import('../views/cost-manage/index.vue')
+      },
+      {
+        path: 'version-manage',
+        name: 'versionManage',
+        component: () => import('../views/version-manage/versionManage.vue')
       }
     ]
   }

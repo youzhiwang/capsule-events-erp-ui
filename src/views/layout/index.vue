@@ -41,6 +41,10 @@
                         <i class="el-icon-setting"/>
                         <span slot="title">成本管理</span>
                     </el-menu-item>
+                    <el-menu-item index="/version-manage">
+                        <i class="el-icon-s-order"/>
+                        <span slot="title">版本日志</span>
+                    </el-menu-item>
                 </el-menu>
             </div>
             <div class="main">
@@ -61,7 +65,20 @@
     methods: {
       handleCommand(commandItem) {
         if (commandItem === 'changePassword') {
-          this.$message.info('开发中')
+          this.$prompt('请输入密码', '修改密码', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            inputType: 'password',
+            inputPattern: /^.*(?=.{8,})(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*? ]).*$/,
+            inputErrorMessage: '最少8位，包括至少1个大写字母，1个小写字母，1个数字，1个特殊字符'
+          }).then(({value}) => {
+            const params = {password: value}
+            this.axios.put('/api/users-password', params).then(res => {
+              res = res.data
+              if (res.code === 'success') this.$message.success('密码修改成功，下次登录将使用新密码')
+              else this.$message.error(res.message)
+            })
+          }).catch(() => {})
         }
         if (commandItem === 'logout') {
           this.axios.get('/api/logout').then(res => {
