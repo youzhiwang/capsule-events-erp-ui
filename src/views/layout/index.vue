@@ -1,3 +1,6 @@
+<style lang="scss" scoped src="./style/index.scss" />
+<style lang="scss" src="./style/el-hack.scss" />
+
 <template>
     <div class="layout">
         <div class="top-nav-wrap">
@@ -18,35 +21,56 @@
             </div>
         </div>
         <div class="main-wrap">
-            <div class="left-nav-warp">
-                <el-menu default-active="home"
-                         class="el-menu-vertical-demo"
-                         background-color="#545c64"
-                         text-color="rgba(255, 255, 255, .6)"
-                         active-text-color="#ffffff"
-                         :router="true">
-                    <el-menu-item index="/home">
-                        <i class="el-icon-s-home"/>
-                        <span slot="title">首页</span>
-                    </el-menu-item>
-                    <el-menu-item index="/brand-manage">
-                        <i class="el-icon-menu"/>
-                        <span slot="title">品牌管理</span>
-                    </el-menu-item>
-                    <el-menu-item index="/commodity-manage">
-                        <i class="el-icon-document"/>
-                        <span slot="title">商品管理</span>
-                    </el-menu-item>
-                    <el-menu-item index="/cost-manage">
-                        <i class="el-icon-s-opportunity"/>
-                        <span slot="title">成本管理</span>
-                    </el-menu-item>
-                    <el-menu-item index="/version-manage">
-                        <i class="el-icon-s-order"/>
-                        <span slot="title">版本日志</span>
-                    </el-menu-item>
-                </el-menu>
-            </div>
+            <el-scrollbar>
+                <div class="left-nav-warp">
+                    <el-menu default-active="/home"
+                             class="el-menu-vertical-demo"
+                             background-color="#545c64"
+                             text-color="rgba(255, 255, 255, .6)"
+                             active-text-color="#ffffff"
+                             :default-openeds="['erp-manage']"
+                             :router="true">
+                        <el-menu-item index="/home">
+                            <i class="el-icon-s-home"/>
+                            <span slot="title">首页</span>
+                        </el-menu-item>
+                        <el-menu-item index="/brand-manage">
+                            <i class="el-icon-menu"/>
+                            <span slot="title">品牌管理</span>
+                        </el-menu-item>
+                        <el-menu-item index="/commodity-manage">
+                            <i class="el-icon-document"/>
+                            <span slot="title">商品管理</span>
+                        </el-menu-item>
+                        <el-menu-item index="/cost-manage">
+                            <i class="el-icon-s-opportunity"/>
+                            <span slot="title">成本管理</span>
+                        </el-menu-item>
+                        <el-submenu index="erp-manage">
+                            <template slot="title">
+                                <i class="el-icon-receiving"></i>
+                                <span slot="title">进销存管理</span>
+                            </template>
+                            <el-menu-item index="/storage-in">
+                                <i class="el-icon-shopping-bag-1"/>
+                                <span slot="title">入库管理</span>
+                            </el-menu-item>
+                            <el-menu-item index="/storage-out">
+                                <i class="el-icon-sold-out"/>
+                                <span slot="title">销库管理</span>
+                            </el-menu-item>
+                            <el-menu-item index="/remaining-query">
+                                <i class="el-icon-shopping-bag-2"/>
+                                <span slot="title">库余查询</span>
+                            </el-menu-item>
+                        </el-submenu>
+                        <el-menu-item index="/version-manage">
+                            <i class="el-icon-s-order"/>
+                            <span slot="title">版本日志</span>
+                        </el-menu-item>
+                    </el-menu>
+                </div>
+            </el-scrollbar>
             <div class="main">
                 <router-view/>
             </div>
@@ -122,71 +146,3 @@
     }
   }
 </script>
-
-<style lang="scss" scoped>
-    .layout {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-
-        .top-nav-wrap {
-            height: 60px;
-            flex-shrink: 0;
-            flex-grow: 0;
-            background-color: rgba(0, 0, 0, .8);
-            display: flex;
-            flex-direction: row;
-
-            .logo {
-                color: #ffffff;
-                padding: 0 24px;
-
-                sub {
-                    font-size: 12px;
-                    color: rgba(255, 255, 255, .8);
-                }
-            }
-
-            .blank {
-                flex: 1;
-            }
-
-            .user-info {
-                padding: 0 16px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                align-content: center;
-
-                .nickname {
-                    color: #fff;
-                    cursor: pointer;
-                }
-            }
-        }
-
-        .main-wrap {
-            width: 100%;
-            flex: 1;
-            display: flex;
-            flex-direction: row;
-            height: 100%;
-            overflow: hidden;
-
-            .left-nav-warp {
-                width: 250px;
-                flex-shrink: 0;
-                flex-grow: 0;
-                background-color: #545c64;
-            }
-
-            .main {
-                flex: 1;
-                width: 100%;
-                overflow: hidden;
-            }
-        }
-    }
-</style>

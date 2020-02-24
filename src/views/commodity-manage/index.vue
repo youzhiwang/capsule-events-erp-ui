@@ -5,14 +5,14 @@
                 <el-row :gutter="24">
                     <el-col :span="6">
                         <el-form-item label="品牌过滤" prop="brandId">
-                            <el-select v-model="filterForm.brandId" placeholder="请选择品牌" style="width: 100%;">
+                            <el-select v-model="filterForm.brandId" filterable placeholder="请选择品牌" style="width: 100%;">
                                 <el-option v-for="(item, index) in brandOptions" :key="index" :label="item.brand_name" :value="item.id" />
                             </el-select>
                         </el-form-item>
                     </el-col>
                     <el-col :span="6">
                         <el-form-item label="子类过滤" prop="subclassId">
-                            <el-select v-model="filterForm.subclassId" placeholder="请选择子类" style="width: 100%;">
+                            <el-select v-model="filterForm.subclassId" filterable placeholder="请选择子类" style="width: 100%;">
                                 <el-option v-for="(item, index) in subclassOptions" :key="index" :label="item.subclass_name" :value="item.id" />
                             </el-select>
                         </el-form-item>
@@ -96,12 +96,12 @@
                    :before-close="handleAddCancel">
             <el-form ref="AddForm" :model="addForm" :rules="addRules" label-width="80px">
                 <el-form-item label="品牌" prop="brandId">
-                    <el-select v-model="addForm.brandId" placeholder="请选择品牌" style="width: 100%;">
+                    <el-select v-model="addForm.brandId" filterable placeholder="请选择品牌" style="width: 100%;">
                         <el-option v-for="(item, index) in brandOptions" :key="index" :label="item.brand_name" :value="item.id" />
                     </el-select>
                 </el-form-item>
                 <el-form-item label="子类" prop="subclassId">
-                    <el-select v-model="addForm.subclassId" placeholder="请选择子类" style="width: 100%;">
+                    <el-select v-model="addForm.subclassId" filterable placeholder="请选择子类" style="width: 100%;">
                         <el-option v-for="(item, index) in addFormSubclassOptions" :key="index" :label="item.subclass_name" :value="item.id" />
                     </el-select>
                 </el-form-item>

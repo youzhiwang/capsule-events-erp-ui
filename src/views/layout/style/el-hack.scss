@@ -1,0 +1,13 @@
+.layout {
+  .el-scrollbar {
+    background-color: #545c64;
+
+    &__wrap {
+      overflow-x: hidden !important;
+    }
+  }
+
+  .el-menu-vertical-demo.el-menu {
+    border: none;
+  }
+}

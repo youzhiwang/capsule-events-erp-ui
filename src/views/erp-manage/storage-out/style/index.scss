@@ -1,0 +1,26 @@
+.storage-out {
+  width: 100%;
+  height: 100%;
+  padding: 0 16px;
+  box-sizing: border-box;
+
+  .filter-wrap {
+    padding-top: 16px;
+  }
+
+  .divider--custom {
+    margin: 0;
+  }
+
+  .operation-wrap {
+    padding: 16px 0;
+  }
+
+  .table-wrap {
+    height: calc(100% - 116px - 1px - 64px - 32px);
+  }
+
+  .pagination-wrap {
+    text-align: right;
+  }
+}

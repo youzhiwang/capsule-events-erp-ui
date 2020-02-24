@@ -46,6 +46,21 @@ const routes = [
         component: () => import('../views/cost-manage/index.vue')
       },
       {
+        path: 'storage-in',
+        name: 'storageIn',
+        component: () => import('../views/erp-manage/storage-in/storageIn.vue')
+      },
+      {
+        path: 'storage-out',
+        name: 'storageOut',
+        component: () => import('../views/erp-manage/storage-out/storageOut.vue')
+      },
+      {
+        path: 'remaining-query',
+        name: 'remainingQuery',
+        component: () => import('../views/erp-manage/remaining-query/remainingQuery.vue')
+      },
+      {
         path: 'version-manage',
         name: 'versionManage',
         component: () => import('../views/version-manage/versionManage.vue')

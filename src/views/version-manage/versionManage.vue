@@ -11,11 +11,11 @@
                 <el-timeline-item timestamp="Future" placement="top">
                     <el-card>
                         <h4>feat:</h4>
-                        <p>1、首页功能</p>
-                        <p>2、进销存管理</p>
-                        <p>3、用户功能需求反馈</p>
-                        <p>4、excel 导入与导出</p>
-                        <p>5、用户操作日志记录</p>
+                        <p>- 首页功能</p>
+                        <p>- 进销存管理</p>
+                        <p>- 用户功能需求反馈</p>
+                        <p>- excel 导入与导出</p>
+                        <p>- 用户操作日志记录</p>
                     </el-card>
                 </el-timeline-item>
                 <el-timeline-item timestamp="2020-02-19" placement="top">

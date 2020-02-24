@@ -1,7 +1,7 @@
 <template>
     <div class="home">
         <div class="tips-wrap">
-            <el-alert type="info" title="首页正在开发中，敬请期待..."/>
+            <el-alert type="info" title="首页正在开发中，敬请期待..." :closable="false" />
         </div>
     </div>
 </template>
