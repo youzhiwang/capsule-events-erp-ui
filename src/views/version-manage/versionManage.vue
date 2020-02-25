@@ -8,14 +8,21 @@
         <div class="timeline-wrap">
             <p class="title">开发日志</p>
             <el-timeline>
-                <el-timeline-item timestamp="Future" placement="top">
+                <el-timeline-item timestamp="Future" placement="top" color="red">
                     <el-card>
                         <h4>feat:</h4>
                         <p>- 首页功能</p>
-                        <p>- 进销存管理</p>
                         <p>- 用户功能需求反馈</p>
                         <p>- excel 导入与导出</p>
                         <p>- 用户操作日志记录</p>
+                    </el-card>
+                </el-timeline-item>
+                <el-timeline-item timestamp="2020-02-25" placement="top" color="lightGreen">
+                    <el-card>
+                        <h4>version: 1.1.1</h4>
+                        <p>1、修复了一些问题</p>
+                        <p>2、增加 ERP 模块</p>
+                        <p>3、首页增加一些静态模块</p>
                     </el-card>
                 </el-timeline-item>
                 <el-timeline-item timestamp="2020-02-19" placement="top">
