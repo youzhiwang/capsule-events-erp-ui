@@ -6,20 +6,23 @@
                     <el-col :span="6">
                         <el-form-item label="品牌过滤" prop="brandId">
                             <el-select v-model="filterForm.brandId" filterable placeholder="请选择品牌" style="width: 100%;">
-                                <el-option v-for="(item, index) in brandOptions" :key="index" :label="item.brand_name" :value="item.id" />
+                                <el-option v-for="(item, index) in brandOptions" :key="index" :label="item.brand_name"
+                                           :value="item.id"/>
                             </el-select>
                         </el-form-item>
                     </el-col>
                     <el-col :span="6">
                         <el-form-item label="子类过滤" prop="subclassId">
-                            <el-select v-model="filterForm.subclassId" filterable placeholder="请选择子类" style="width: 100%;">
-                                <el-option v-for="(item, index) in subclassOptions" :key="index" :label="item.subclass_name" :value="item.id" />
+                            <el-select v-model="filterForm.subclassId" filterable placeholder="请选择子类"
+                                       style="width: 100%;">
+                                <el-option v-for="(item, index) in subclassOptions" :key="index"
+                                           :label="item.subclass_name" :value="item.id"/>
                             </el-select>
                         </el-form-item>
                     </el-col>
                     <el-col :span="6">
                         <el-form-item label="商品名称" prop="commodityName">
-                            <el-input v-model="filterForm.commodityName" placeholder="请输入商品名称" />
+                            <el-input v-model="filterForm.commodityName" placeholder="请输入商品名称"/>
                         </el-form-item>
                     </el-col>
                     <el-col :span="6">
@@ -29,7 +32,7 @@
                 </el-row>
             </el-form>
         </div>
-        <el-divider class="divider--custom" />
+        <el-divider class="divider--custom"/>
         <div class="operation-wrap">
             <el-button type="primary" @click="addDialogVisible = true">新增商品</el-button>
             <el-button @click="$message.info('导出功能正在开发中')">导 出</el-button>
@@ -42,31 +45,31 @@
                             <el-col :span="24">
                                 <p>
                                     <span>尺寸(mm): </span>
-                                    <span>{{ row.size }}</span>
+                                    <span>{{ row.size === '' ? '-' : row.size }}</span>
                                 </p>
                             </el-col>
                             <el-col :span="24">
                                 <p>
                                     <span>备注: </span>
-                                    <span>{{ row.remark }}</span>
+                                    <span>{{ row.remark === '' ? '-' : row.remark }}</span>
                                 </p>
                             </el-col>
                         </el-row>
                     </template>
                 </el-table-column>
-                <el-table-column label="序号" type="index" :index="indexMethod" />
-                <el-table-column label="品牌" prop="brand_name" />
-                <el-table-column label="子类" prop="subclass_name" />
-                <el-table-column label="商品名称" prop="commodity_name" />
-                <el-table-column label="商品别称" prop="commodity_nickname" />
+                <el-table-column label="序号" type="index" :index="indexMethod"/>
+                <el-table-column label="品牌" prop="brand_name"/>
+                <el-table-column label="子类" prop="subclass_name"/>
+                <el-table-column label="商品名称" prop="commodity_name"/>
+                <el-table-column label="商品别称" prop="commodity_nickname"/>
                 <el-table-column label="总成本(¥)" prop="cost">
                     <template #default="{row}">
-                        <span>{{ row.cost.toFixed(2) }}</span>
+                        <span>{{ row.cost === 0 ? '-' : row.cost.toFixed(2) }}</span>
                     </template>
                 </el-table-column>
                 <el-table-column label="页面价(¥)" prop="price">
                     <template #default="{row}">
-                        <span>{{ row.price.toFixed(2) }}</span>
+                        <span>{{ row.price === 0 ? '-' : row.price.toFixed(2) }}</span>
                     </template>
                 </el-table-column>
                 <el-table-column label="操作" width="150px">
@@ -97,19 +100,21 @@
             <el-form ref="AddForm" :model="addForm" :rules="addRules" label-width="80px">
                 <el-form-item label="品牌" prop="brandId">
                     <el-select v-model="addForm.brandId" filterable placeholder="请选择品牌" style="width: 100%;">
-                        <el-option v-for="(item, index) in brandOptions" :key="index" :label="item.brand_name" :value="item.id" />
+                        <el-option v-for="(item, index) in brandOptions" :key="index" :label="item.brand_name"
+                                   :value="item.id"/>
                     </el-select>
                 </el-form-item>
                 <el-form-item label="子类" prop="subclassId">
                     <el-select v-model="addForm.subclassId" filterable placeholder="请选择子类" style="width: 100%;">
-                        <el-option v-for="(item, index) in addFormSubclassOptions" :key="index" :label="item.subclass_name" :value="item.id" />
+                        <el-option v-for="(item, index) in addFormSubclassOptions" :key="index"
+                                   :label="item.subclass_name" :value="item.id"/>
                     </el-select>
                 </el-form-item>
                 <el-form-item label="商品名称" prop="commodityName">
-                    <el-input v-model="addForm.commodityName" placeholder="请输入商品名称" />
+                    <el-input v-model="addForm.commodityName" placeholder="请输入商品名称"/>
                 </el-form-item>
                 <el-form-item label="商品别称" prop="commodityNickname">
-                    <el-input v-model="addForm.commodityNickname" placeholder="请输入商品名称" />
+                    <el-input v-model="addForm.commodityNickname" placeholder="请输入商品名称"/>
                 </el-form-item>
                 <el-form-item label="总成本" prop="cost">
                     <el-input v-model="addForm.cost" type="number" placeholder="请输入总成本，保留2位小数">
@@ -145,19 +150,21 @@
             <el-form ref="EditForm" :model="editForm" :rules="addRules" label-width="80px">
                 <el-form-item label="品牌" prop="brandId">
                     <el-select v-model="editForm.brandId" placeholder="请选择品牌" disabled style="width: 100%;">
-                        <el-option v-for="(item, index) in brandOptions" :key="index" :label="item.brand_name" :value="item.id" />
+                        <el-option v-for="(item, index) in brandOptions" :key="index" :label="item.brand_name"
+                                   :value="item.id"/>
                     </el-select>
                 </el-form-item>
                 <el-form-item label="子类" prop="subclassId">
                     <el-select v-model="editForm.subclassId" placeholder="请选择子类" disabled style="width: 100%;">
-                        <el-option v-for="(item, index) in addFormSubclassOptions" :key="index" :label="item.subclass_name" :value="item.id" />
+                        <el-option v-for="(item, index) in addFormSubclassOptions" :key="index"
+                                   :label="item.subclass_name" :value="item.id"/>
                     </el-select>
                 </el-form-item>
                 <el-form-item label="商品名称" prop="commodityName">
-                    <el-input v-model="editForm.commodityName" disabled placeholder="请输入商品名称" />
+                    <el-input v-model="editForm.commodityName" disabled placeholder="请输入商品名称"/>
                 </el-form-item>
                 <el-form-item label="商品别称" prop="commodityNickname">
-                    <el-input v-model="editForm.form.commodityNickname" placeholder="请输入商品名称" />
+                    <el-input v-model="editForm.form.commodityNickname" placeholder="请输入商品名称"/>
                 </el-form-item>
                 <el-form-item label="总成本" prop="cost">
                     <el-input v-model="editForm.form.cost" type="number" placeholder="请输入总成本，保留2位小数">
@@ -169,7 +176,7 @@
                         <template slot="append">¥</template>
                     </el-input>
                 </el-form-item>
-                <el-form-item label="尺寸" prop="price">
+                <el-form-item label="尺寸" prop="size">
                     <el-input v-model="editForm.form.size" placeholder="请输入尺寸">
                         <template slot="append">mm</template>
                     </el-input>
@@ -187,6 +194,8 @@
 </template>
 
 <script>
+  import mixin from '../../mixins/index'
+
   export default {
     name: 'commodityManage',
     data() {
@@ -229,6 +238,12 @@
             {required: true, trigger: 'blur', message: '请输入商品名称'},
             {max: 100, trigger: 'blur', message: '最长100个字符'}
           ],
+          cost: [
+            {validator: this.priceValidator, trigger: 'blur'}
+          ],
+          price: [
+            {validator: this.priceValidator, trigger: 'blur'}
+          ]
         },
         addFormSubclassOptions: [],
         editDialogVisible: false,
@@ -287,13 +302,14 @@
         }
       },
       'addForm.subclassId': {
-        handler(newVal){
+        handler(newVal) {
           if (newVal === '') return
           const subclassOption = this.addFormSubclassOptions.find((item) => item.id === newVal)
           this.addForm.subclassName = subclassOption.subclass_name
         }
       }
     },
+    mixins: [mixin],
     methods: {
       indexMethod(index) {
         return (this.paginationConfig.pageNum - 1) * this.paginationConfig.pageSize + index + 1
@@ -363,7 +379,7 @@
           if (v) {
             this.axios.put('/api/commodity', this.editForm.form).then(res => {
               res = res.data
-              if (res.code === 'success'){
+              if (res.code === 'success') {
                 this.handleEditCancel()
                 this.getTableData()
                 this.$message.success('修改成功')
@@ -418,27 +434,30 @@
 </script>
 
 <style lang="scss" scoped>
-.commodity-manage {
-    padding: 0 16px;
-    box-sizing: border-box;
-    height: 100%;
-    width: 100%;
-    .filter-wrap {
-        padding-top: 16px;
-    }
-    .divider--custom {
-        margin: 0;
-    }
-    .operation-wrap {
-        padding: 16px 0;
-    }
+    .commodity-manage {
+        padding: 0 16px;
+        box-sizing: border-box;
+        height: 100%;
+        width: 100%;
 
-    .table-wrap {
-        height: calc(100% - 66px - 1px - 64px - 32px);
-    }
+        .filter-wrap {
+            padding-top: 16px;
+        }
 
-    .pagination-wrap {
-        text-align: right;
+        .divider--custom {
+            margin: 0;
+        }
+
+        .operation-wrap {
+            padding: 16px 0;
+        }
+
+        .table-wrap {
+            height: calc(100% - 66px - 1px - 64px - 32px);
+        }
+
+        .pagination-wrap {
+            text-align: right;
+        }
     }
-}
 </style>

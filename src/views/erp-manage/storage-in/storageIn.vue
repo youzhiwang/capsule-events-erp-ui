@@ -15,7 +15,8 @@
                     </el-col>
                     <el-col :span="6">
                         <el-form-item label="子类过滤" prop="subclassId">
-                            <el-select v-model="filterForm.subclassId" filterable placeholder="请选择子类" style="width: 100%;">
+                            <el-select v-model="filterForm.subclassId" filterable placeholder="请选择子类"
+                                       style="width: 100%;">
                                 <el-option v-for="item in filterFormSubclassOptions" :key="item.id"
                                            :label="item.subclass_name" :value="item.id"/>
                             </el-select>
@@ -23,7 +24,8 @@
                     </el-col>
                     <el-col :span="6">
                         <el-form-item label="商品" prop="commodityId">
-                            <el-select v-model="filterForm.commodityId" filterable placeholder="请选择商品名称" style="width: 100%;">
+                            <el-select v-model="filterForm.commodityId" filterable placeholder="请选择商品名称"
+                                       style="width: 100%;">
                                 <el-option v-for="item in filterFormCommodityOptions" :key="item.id"
                                            :label="item.commodity_name" :value="item.id"/>
                             </el-select>
@@ -71,17 +73,17 @@
                         </el-row>
                     </template>
                 </el-table-column>
-                <el-table-column label="序号" type="index" :index="indexMethod" />
-                <el-table-column label="品牌" prop="brand_name" />
-                <el-table-column label="子类" prop="subclass_name" />
-                <el-table-column label="商品" prop="commodity_name" />
-                <el-table-column label="入库数量" prop="storage_in_number" />
+                <el-table-column label="序号" type="index" :index="indexMethod"/>
+                <el-table-column label="品牌" prop="brand_name"/>
+                <el-table-column label="子类" prop="subclass_name"/>
+                <el-table-column label="商品" prop="commodity_name"/>
+                <el-table-column label="入库数量" prop="storage_in_number"/>
                 <el-table-column label="入库时间" prop="storage_in_time">
                     <template #default="{row}">
                         <span>{{ row.storage_in_time | timeFormat }}</span>
                     </template>
                 </el-table-column>
-                <el-table-column label="操作用户" prop="operation_username" />
+                <el-table-column label="操作用户" prop="operation_username"/>
             </el-table>
         </div>
         <div class="pagination-wrap">
@@ -136,7 +138,7 @@
 </template>
 
 <script>
-  import moment from 'moment'
+  import mixin from '../../../mixins/index'
 
   export default {
     name: 'storageIn',
@@ -179,7 +181,8 @@
             {required: true, trigger: 'change', message: '请选择商品'}
           ],
           storageInNumber: [
-            {required: true, trigger: 'blur', message: '请输入入库数量'}
+            {required: true, trigger: 'blur', message: '请输入入库数量'},
+            {validator: this.noNegativeIntegerValidator, trigger: 'blur'}
           ]
         },
         addFormSubclassOptions: [],
@@ -264,11 +267,7 @@
         })
       }
     },
-    filters: {
-      timeFormat(val) {
-        return moment(val).format('YYYY-MM-DD')
-      }
-    },
+    mixins: [mixin],
     methods: {
       indexMethod(index) {
         return (this.paginationConfig.pageNum - 1) * this.paginationConfig.pageSize + index + 1

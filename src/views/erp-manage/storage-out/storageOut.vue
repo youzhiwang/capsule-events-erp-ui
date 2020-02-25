@@ -136,7 +136,7 @@
 </template>
 
 <script>
-  import moment from 'moment'
+  import mixin from '../../../mixins/index'
 
   export default {
     name: 'storageOut',
@@ -179,7 +179,8 @@
             {required: true, trigger: 'change', message: '请选择商品'}
           ],
           storageOutNumber: [
-            {required: true, trigger: 'blur', message: '请输入销库数量'}
+            {required: true, trigger: 'blur', message: '请输入销库数量'},
+            {validator: this.noNegativeIntegerValidator, trigger: 'blur'}
           ]
         },
         addFormSubclassOptions: [],
@@ -264,11 +265,7 @@
         })
       }
     },
-    filters: {
-      timeFormat(val) {
-        return moment(val).format('YYYY-MM-DD')
-      }
-    },
+    mixins: [mixin],
     methods: {
       indexMethod(index) {
         return (this.paginationConfig.pageNum - 1) * this.paginationConfig.pageSize + index + 1

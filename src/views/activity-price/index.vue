@@ -26,7 +26,7 @@
                             <el-col :span="24">
                                 <p>
                                     <span>活动创建时间: </span>
-                                    <span>{{ row.create_time }}</span>
+                                    <span>{{ row.create_time | timeFormat }}</span>
                                 </p>
                             </el-col>
                             <el-col :span="24">
@@ -45,11 +45,19 @@
                 <el-table-column label="同期页面价(¥)" prop="period_price"/>
                 <el-table-column label="优惠幅度(%)" prop="discount_rate">
                     <template #default="{row}">
-                        <span>{{ row.discount_rate * 100 }}%</span>
+                        <span>{{ (row.discount_rate * 100).toFixed(2) }}%</span>
                     </template>
                 </el-table-column>
-                <el-table-column label="活动开始时间" prop="start_time"/>
-                <el-table-column label="活动结束时间" prop="end_time"/>
+                <el-table-column label="活动开始时间" prop="start_time">
+                    <template #default="{row}">
+                        <span>{{ row.start_time | timeFormat }}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="活动结束时间" prop="end_time">
+                    <template #default="{row}">
+                        <span>{{ row.end_time | timeFormat }}</span>
+                    </template>
+                </el-table-column>
                 <el-table-column label="操作" width="150px">
                     <template #default="{row}">
                         <el-button type="text" @click="handleEdit(row)">编辑</el-button>
@@ -132,6 +140,7 @@
 </template>
 
 <script>
+    import mixin from '../../mixins/index'
   export default {
     name: 'activityPrice',
     data() {
@@ -173,6 +182,7 @@
         }
       }
     },
+    mixins: [mixin],
     methods: {
       handleBack() {
         this.$router.back()

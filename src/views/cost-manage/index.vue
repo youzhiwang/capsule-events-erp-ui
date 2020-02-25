@@ -17,7 +17,7 @@
                 </el-row>
             </el-form>
         </div>
-        <el-divider class="divider--custom" />
+        <el-divider class="divider--custom"/>
         <div class="operation-wrap">
             <el-button type="primary" @click="addDialogVisible = true">新增采购</el-button>
             <el-button @click="$message.info('导出功能正在开发中')">导 出</el-button>
@@ -46,7 +46,11 @@
                 <el-table-column label="采购商品" prop="purchase_goods"/>
                 <el-table-column label="采购价格(¥)" prop="purchase_price"/>
                 <el-table-column label="单位" prop="unit"/>
-                <el-table-column label="采购时间" prop="purchase_time"/>
+                <el-table-column label="采购时间" prop="purchase_time">
+                    <template #default="{row}">
+                        <span>{{ row.purchase_time | timeFormat }}</span>
+                    </template>
+                </el-table-column>
                 <el-table-column label="联系人" prop="contact_person"/>
                 <el-table-column label="联系电话" prop="contact_phone"/>
                 <el-table-column label="操作" width="100px">
@@ -152,6 +156,8 @@
 </template>
 
 <script>
+  import mixin from '../../mixins/index'
+
   export default {
     name: 'costManage',
     data() {
@@ -216,9 +222,10 @@
           contactPhone: '',
           contactAddress: '',
           remark: ''
-        },
+        }
       }
     },
+    mixins: [mixin],
     methods: {
       handleSizeChange(pageSize) {
         this.paginationConfig.pageSize = pageSize

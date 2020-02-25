@@ -1,0 +1,26 @@
+.remaining-query {
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 16px;
+
+  .filter-wrap {
+    padding-top: 16px;
+  }
+
+  .divider--custom {
+    margin: 0;
+  }
+
+  .operation-wrap {
+    padding: 16px 0;
+  }
+
+  .table-wrap {
+    height: calc(100% - 66px - 1px - 64px - 32px);
+  }
+
+  .pagination-wrap {
+    text-align: right;
+  }
+}

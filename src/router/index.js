@@ -61,6 +61,11 @@ const routes = [
         component: () => import('../views/erp-manage/remaining-query/remainingQuery.vue')
       },
       {
+        path: 'remaining-change-log/:commodityId',
+        name: 'remainingChangeLog',
+        component: () => import('../views/erp-manage/remaining-query/remaining-change-log/remainingChangeLog.vue')
+      },
+      {
         path: 'version-manage',
         name: 'versionManage',
         component: () => import('../views/version-manage/versionManage.vue')
