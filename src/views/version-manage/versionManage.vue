@@ -19,6 +19,12 @@
                 </el-timeline-item>
                 <el-timeline-item timestamp="2020-02-25" placement="top" color="lightGreen">
                     <el-card>
+                        <h4>version: 1.1.2</h4>
+                        <p>1、优化了余量查询：在进入余量修改记录历史之后，返回将会保存余量查询之前的状态</p>
+                    </el-card>
+                </el-timeline-item>
+                <el-timeline-item timestamp="2020-02-25" placement="top">
+                    <el-card>
                         <h4>version: 1.1.1</h4>
                         <p>1、修复了一些问题</p>
                         <p>2、增加 ERP 模块</p>

@@ -5,7 +5,7 @@
     <div class="layout">
         <div class="top-nav-wrap">
             <div class="logo">
-                <h3>Capsule Events ERP <sub>v: 1.1.1</sub></h3>
+                <h3>Capsule Events ERP <sub>v: 1.1.2</sub></h3>
             </div>
             <div class="blank"/>
             <div class="user-info">
@@ -72,7 +72,9 @@
                 </div>
             </el-scrollbar>
             <div class="main">
-                <router-view/>
+                <keep-alive :include="keepAliveInclude">
+                    <router-view/>
+                </keep-alive>
             </div>
         </div>
     </div>
@@ -84,7 +86,9 @@
     data() {
       return {
         greetingWords: '',
-        nickname: ''
+        nickname: '',
+        // 会被保留的组件 name
+        keepAliveInclude: ['remainingQuery']
       }
     },
     methods: {
